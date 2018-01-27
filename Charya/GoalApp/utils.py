@@ -29,6 +29,7 @@ def updateGoalWeightage(goalsListApplicable):
 
 def getGoalScoreGivenMinLimit(min_expected, actual):
     #[min:max]
+    #test commit by Sri
     # TODO : handle [:y] case when max limit is not known for penality calculation
     if(actual >= min_expected):
         return 5050

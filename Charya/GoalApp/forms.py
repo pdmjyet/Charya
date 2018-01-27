@@ -19,7 +19,7 @@ class GroupForm(forms.ModelForm):
     partner2_username = forms.CharField(widget=forms.TextInput())
     class Meta():
         model = models.Group
-        fields = ('name',)
+        fields = ('name', 'description')
 
 class GoalForm(forms.ModelForm):
     class Meta():

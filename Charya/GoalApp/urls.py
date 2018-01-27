@@ -5,4 +5,6 @@ app_name = "GoalApp"
 urlpatterns = [
     url(r'^user/(?P<pk>\d+)/$', views.userprofile_details, name='userprofile_detail' ),
     url(r'^group/$', views.CreateGroupView.as_view(), name='group_create' ),
+    url(r'^group/(?P<pk>\d+)/$', views.group_details, name='group_detail' ),
+
 ]

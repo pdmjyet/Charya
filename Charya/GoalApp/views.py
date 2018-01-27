@@ -1,5 +1,6 @@
 from django.shortcuts import render
 from GoalApp import forms, models
+from GoalApp.models import UserProfile
 from django.db.models import Q
 from django.shortcuts import render, get_object_or_404
 from django.contrib.auth.decorators import login_required
@@ -28,9 +29,12 @@ class CreateGroupView(CreateView):
 @login_required
 def group_details(request, pk):
     group = get_object_or_404(models.Group, pk=pk)
-    user1 = models.UserProfile.objects.get(username = group.partner1_ID)
-    user2 = models.UserProfile.objects.get(username = group.partner2_ID)
-    return render(request, 'GoalApp/group_detail.html', {'group': group, 'user1': user1, 'user2': user2})
+    print(group)
+    print(group.partner1.pk)
+    print(group.partner2)
+    #user1 = models.UserProfile.objects.get(pk= group.partner1_ID)
+    #user2 = models.UserProfile.objects.get(pk= group.partner2_ID)
+    return render(request, 'GoalApp/group_detail.html', {'group': group, 'user1': partner1, 'user2': partner2})
 
 @login_required
 def userprofile_details(request, pk):

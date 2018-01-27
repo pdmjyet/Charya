@@ -1,5 +1,18 @@
 <!DOCTYPE html>
 {% extends "GoalApp/base.html" %}
+{% block css %}
+  <link rel="stylesheet" href="css/quote.css">
+{% endblock %}
 {% block content %}
+<div class="container">
+
+  {% if group.description %}
+    <blockquote class="quote-card green-card">
+      <p>{{group.description}}</p>
+      <cite>{% user1.username+"_"+user2.username %}</cite>
+    </blockquote>
+  {% endif %}
+
+</div>
 <h1>In Detail group</h1>
 {% endblock %}

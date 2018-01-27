@@ -16,7 +16,7 @@ class UserProfile(models.Model):
 class Goal(models.Model):
     UserID = models.ForeignKey(UserProfile)
     title = models.CharField(max_length=200, null= False)
-    description = models.TextField()
+    description = models.TextField(null=True)
     weightage = models.FloatField(default=0.0)
     ###########################################
     # json representation of all days of a week
@@ -65,5 +65,9 @@ class Score(models.Model):
 
 class Group(models.Model):
     name = models.CharField(max_length=250)
-    partner1_ID = models.ForeignKey(UserProfile, related_name="partner1")
-    partner2_ID = models.ForeignKey(UserProfile, related_name="partner2")
+    description = models.TextField(null=True)
+    partner1 = models.ForeignKey(UserProfile, related_name="partner1")
+    partner2 = models.ForeignKey(UserProfile, related_name="partner2")
+
+    def __str__(self):
+        return self.name

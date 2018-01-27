@@ -29,12 +29,29 @@ class CreateGroupView(CreateView):
 @login_required
 def group_details(request, pk):
     group = get_object_or_404(models.Group, pk=pk)
-    print(group)
-    print(group.partner1.pk)
-    print(group.partner2)
-    #user1 = models.UserProfile.objects.get(pk= group.partner1_ID)
-    #user2 = models.UserProfile.objects.get(pk= group.partner2_ID)
-    return render(request, 'GoalApp/group_detail.html', {'group': group, 'user1': partner1, 'user2': partner2})
+    weeklyTally = [
+        {
+            "week" : "Feb1-Feb7",
+            "user2" : "300",
+            "user1": "300",
+        },
+        {
+            "week" : "Feb8-Feb15",
+            "user2" : "350",
+            "user1": "304",
+        }
+    ]
+    goals = {
+        "user1" : models.Goal.objects.all().filter(pk=group.partner1.pk),
+        "user2" : models.Goal.objects.all().filter(pk=group.partner2.pk),
+    }
+    return render(request, 'GoalApp/group_detail.html', {'group': group,
+                                                        'user1': group.partner1,
+                                                        'user2': group.partner2,
+                                                        'user1score': 100,
+                                                        'user2score': 200,
+                                                        'weeklyTally': weeklyTally,
+                                                        'goals': goals})
 
 @login_required
 def userprofile_details(request, pk):

@@ -12,3 +12,4 @@ class UserProfileAdmin(admin.ModelAdmin):
 
 admin.site.register(models.UserProfile, UserProfileAdmin)
 admin.site.register(models.Group, GroupAdmin)
+admin.site.register(models.Goal)

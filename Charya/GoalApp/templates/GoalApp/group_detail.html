@@ -1,18 +1,116 @@
 <!DOCTYPE html>
 {% extends "GoalApp/base.html" %}
 {% block css %}
-  <link rel="stylesheet" href="css/quote.css">
+  {% load staticfiles %}
+  <link rel="stylesheet" href="{% static 'css/quote.css' %}">
+
 {% endblock %}
 {% block content %}
-<div class="container">
+<div class="row">
 
-  {% if group.description %}
-    <blockquote class="quote-card green-card">
-      <p>{{group.description}}</p>
-      <cite>{% user1.username+"_"+user2.username %}</cite>
-    </blockquote>
-  {% endif %}
+  <div class="col-md-2"></div>
+  <div class="col-md-8">
+
+    {% if group.description %}
+      <blockquote class="quote-card green-card">
+        <p>{{group.description}}</p>
+        <cite>{{group.partner1}}, {{group.partner2}}</cite>
+      </blockquote>
+    {% endif %}
+    <div class="center_align">
+      <h1>Tally</h1>
+      <p>Average self discipline for this month</p>
+    </div>
+
+  </div>
+  <div class="col-md-2"></div>
 
 </div>
-<h1>In Detail group</h1>
+<div class="row center_align">
+  <div class="col-md-2"></div>
+  <div class="col-md-4 canvas">
+    <table>
+      <tr>
+        <td><img src="{{ group.partner1.profile_pic.url }}" alt=""></td>
+        <td>
+          <div class="username">
+            <p>{{group.partner1}}</p>
+            <p>{{user1score}}</p>
+          </div>
+        </td>
+      </tr>
+    </table>
+
+
+  </div>
+  <div class="col-md-4 canvas">
+    <table class="right_align">
+      <tr>
+        <td>
+          <div class="username">
+            <p>{{group.partner2}}</p>
+            <p>{{user2score}}</p>
+          </div>
+        </td>
+        <td><img src="{{ group.partner2.profile_pic.url }}" alt=""></td>
+      </tr>
+    </table>
+  </div>
+  <div class="col-md-2"></div>
+</div>
+<!-- Weekly Tally -->
+  {% for week in weeklyTally %}
+  <div class="row">
+    <div class="col-md-2"></div>
+    <div class="col-md-8 weeklybanner">
+        <h2>{{week.week}}</h2>
+    </div>
+    <div class="col-md-2"></div>
+  </div>
+  <div class="row">
+    <div class="col-md-2"></div>
+    <div class="col-md-4">
+      <ul>{{week.user1}}</ul>
+    </div>
+    <div class="col-md-4">
+      <ul>{{week.user2}}</ul>
+    </div>
+    <div class="col-md-2"></div>
+  </div>
+{%endfor%}
+<!-- Goal Wise information -->
+<div class="row">
+  <div class="col-md-2"></div>
+  <div class="col-md-4">
+
+
+    <div class="btn-group">
+      <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">
+        Goals
+      </button>
+      <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+        <button class="dropdown-item" type="button">Action</button>
+        {% for goal in goals.user1 %}
+          <button class = "dropdown-item" type="button" goalID="{{goal.pk}}">{{goal.title}}</button>
+        {% endfor %}
+
+      </div>
+    </div>
+  </div>
+  <div class="col-md-4">
+    <div class="btn-group">
+      <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton2" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">
+        Goals
+      </button>
+      <div class="dropdown-menu" aria-labelledby="dropdownMenuButton2">
+        <button class="dropdown-item" type="button">Action</button>
+        {% for goal in goals.user2 %}
+          <button class = "dropdown-item" type="button" goalID="{{goal.pk}}">{{goal.title}}</button>
+        {% endfor %}
+
+      </div>
+    </div>
+  </div>
+  <div class="col-md-2"></div>
+</div>
 {% endblock %}

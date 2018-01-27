@@ -6,14 +6,6 @@ body {
   font-weight: 300;
 }
 
-.container {
-  max-width: 800px;
-  margin:10px auto;
-}
-
-.text-center {
-  text-align: center;
-}
 
 .quote-card {
   background: #fff;

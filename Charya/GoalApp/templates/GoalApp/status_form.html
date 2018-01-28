@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+{% extends "GoalApp/base.html" %}
+{% block content %}
+<form action="" method="post">
+  <div class="container">
+    {% csrf_token %}
+
+    <div class="form-group">
+      <label for="sel1">Select Date:</label>
+      <select class="form-control" id="date" name="date">
+        {% for date in dates %}
+        <option>{{date}}</option>
+        {% endfor %}
+      </select>
+      {% for goal in goals %}
+      <label for="{{goal.pk}}">{{goal.title}}</label>
+      <input type="number" class="form-control" id="{{goal.pk}}" name="{{goal.pk}}" aria-describedby="{{goal.title}}" placeholder="Enter in {{goal.metricsUnit}}" required>
+
+      {% endfor %}
+    </div>
+    <input type="submit" class="btn btn-primary" value="Submit"></input>
+  </div>
+</form>
+{% endblock %}
